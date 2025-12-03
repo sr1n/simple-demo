@@ -4,17 +4,17 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo "Building..."
+                sh 'docker build -t my-app .'
             }
         }
         stage('Test') {
             steps {
-                echo "Testing..."
+                sh 'docker run -it my-app npm run test'
             }
         }
         stage('Deploy') {
             steps {
-                echo "Deploying..."
+                sh 'kubectl apply -f deployment.yaml'
             }
         }
     }
